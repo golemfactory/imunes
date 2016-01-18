@@ -340,7 +340,8 @@ proc createNodeContainer { node } {
     }
 
     catch {exec docker run -d --privileged --cap-add=ALL --net=$network -h [getNodeName $node] \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
+	-v /tmp/imunes/$node_id:/log \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
         --name $node_id $VROOT_MASTER } err
     if { $debug } {
         puts "'exec docker run' ($node_id) caught:\n$err"
